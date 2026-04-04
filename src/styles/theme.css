@@ -1,0 +1,42 @@
+:root {
+
+  --primary: 99 102 241;
+  --primary-hover: 79 70 229;
+
+  --bg-main: 243 244 246;
+  --bg-card: 255 255 255;
+
+  --text-main: 17 24 39;
+
+  --border-color: 229 231 235;
+
+}
+
+/* dark theme */
+[data-theme="dark"] {
+
+  --primary: 139 92 246;
+  --primary-hover: 124 58 237;
+
+  --bg-main: 17 24 39;
+  --bg-card: 31 41 55;
+
+  --text-main: 255 255 255;
+
+  --border-color: 55 65 81;
+
+}
+/* custom theme example */
+[data-theme="ocean"] {
+
+  --primary: #0891b2;
+  --primary-hover: #0e7490;
+
+  --bg-main: #ecfeff;
+  --bg-card: #ffffff;
+
+  --text-main: #083344;
+  --text-secondary: #155e75;
+
+  --border-color: #67e8f9;
+}

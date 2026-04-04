@@ -1,0 +1,124 @@
+import React, { useState, useEffect } from "react";
+import API from "../services/api";
+import logo from "../assets/Iperitus.png";
+
+function Login() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginUser = async () => {
+    try {
+
+
+      const res = await API.post("/auth/login", {
+        email,
+        password
+      });
+
+      localStorage.setItem("token", res.data.token);
+
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      alert("Invalid login");
+    }
+  };
+
+
+  return (
+
+    <div className="
+      min-h-screen
+      flex items-center justify-center
+      bg-bgMain
+    ">
+
+      <div className="
+        bg-bgCard
+        text-textMain
+        p-8
+        rounded-2xl
+        shadow-xl
+        w-full max-w-md
+        border
+        border-borderColor
+      ">
+
+        {/* LOGO */}
+        <img
+          src={logo}
+          alt="Peritus Logo"
+          className="h-40 mx-auto "
+        />
+
+
+        {/* <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          HRMS Login
+        </h2> */}
+
+        <div className="space-y-4">
+
+          <input
+            type="email"
+            placeholder="Email"
+            autoComplete="off"
+            className="
+              w-full
+              px-4 py-2
+              bg-bgMain
+              text-textMain
+              border
+              border-borderColor
+              rounded-lg"
+
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            className="
+              w-full
+              px-4 py-2
+              bg-bgMain
+              text-textMain
+              border
+              border-borderColor
+              rounded-lg"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button
+            onClick={loginUser}
+            className="
+              w-full
+              py-2
+              rounded-lg
+              bg-primary
+              hover:bg-primaryHover
+              text-white
+              font-semibold
+              bg-black
+              transition"
+          >
+            Login
+          </button>
+
+        </div>
+
+        <p className="text-sm text-gray-500 text-center mt-4">
+          HR Management System
+        </p>
+
+      </div>
+
+    </div>
+
+  );
+}
+
+export default Login;
