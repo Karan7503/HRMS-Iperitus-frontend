@@ -11,61 +11,160 @@ function Navbar(){
         navigate("/");
     };
 
+    const changeTheme = (theme) => {
+
+        document.documentElement.setAttribute(
+            "data-theme",
+            theme
+        );
+
+        localStorage.setItem("theme", theme);
+
+    };
+
     return(
 
-        <nav className="bg-gray-900 px-8 py-3 flex items-center justify-between shadow-md">
+        <nav
+        className="
+        bg-bgCard
+        border-b
+        border-borderColor
+
+        px-8
+        py-3
+
+        flex
+        items-center
+        justify-between
+
+        shadow-md
+        "
+        >
 
             {/* LEFT - LOGO */}
             <div className="flex items-center gap-3">
+
                 <img 
                     src={logo} 
                     alt="Peritus Logo"
                     className="h-10"
                 />
 
-                <span className="text-white font-semibold text-lg">
+                <span
+                className="
+                text-textMain
+                font-semibold
+                text-lg
+                "
+                >
                     HRMS
                 </span>
+
             </div>
 
 
-            {/* RIGHT - SHOW ONLY IF LOGGED IN */}
+            {/* RIGHT - NAV LINKS */}
             {token && (
 
-                <div className="flex items-center gap-8 text-gray-200 font-medium">
+                <div
+                className="
+                flex
+                items-center
+                gap-8
+
+                text-textMain
+                font-medium
+                "
+                >
 
                     <Link 
                         to="/dashboard"
-                        className="hover:text-indigo-400 transition"
+                        className="
+                        hover:text-primary
+                        transition
+                        "
                     >
                         Dashboard
                     </Link>
 
                     <Link 
                         to="/employees"
-                        className="hover:text-indigo-400 transition"
+                        className="
+                        hover:text-primary
+                        transition
+                        "
                     >
                         Employees
                     </Link>
 
                     <Link 
                         to="/attendance"
-                        className="hover:text-indigo-400 transition"
+                        className="
+                        hover:text-primary
+                        transition
+                        "
                     >
                         Attendance
                     </Link>
 
                     <Link 
                         to="/leave"
-                        className="hover:text-indigo-400 transition"
+                        className="
+                        hover:text-primary
+                        transition
+                        "
                     >
                         Leave
                     </Link>
 
+
+                    {/* THEME SWITCH */}
+                    <select
+                        onChange={(e) => changeTheme(e.target.value)}
+                        className="
+                        bg-bgMain
+                        text-textMain
+
+                        border
+                        border-borderColor
+
+                        rounded
+                        px-2
+                        py-1
+                        "
+                    >
+
+                        <option value="light">
+                            Light
+                        </option>
+
+                        <option value="dark">
+                            Dark
+                        </option>
+
+                        <option value="green">
+                            Green
+                        </option>
+
+                    </select>
+
+
                     {/* LOGOUT BUTTON */}
                     <button
                         onClick={logoutUser}
-                        className="bg-red-500 px-3 py-1 rounded text-white hover:bg-red-600"
+                        className="
+                        bg-primary
+                        hover:bg-primaryHover
+
+                        text-white
+
+                        px-3
+                        py-1
+
+                        rounded
+
+                        transition
+                        "
                     >
                         Logout
                     </button>
