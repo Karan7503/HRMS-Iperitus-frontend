@@ -1,21 +1,59 @@
 :root {
 
-  --primary: 99 102 241;
-  --primary-hover: 79 70 229;
+  /* softBlue */
 
-  --bg-main: 243 244 246;
-  --bg-card: 255 255 255;
+   /* --primary: 79 124 255;          
+  --primary-hover: 59 102 224;    
+  --bg-main: 245 247 251;        
+  --bg-card: 255 255 255;         
 
-  --text-main: 17 24 39;
+  --text-main: 31 41 55;          
 
-  --border-color: 229 231 235;
+  --border-color: 229 231 235;     */
+
+  /* mintGreen */
+
+  /* --primary: 58 191 175;          
+  --primary-hover: 45 168 154;    
+
+  --bg-main: 242 251 249;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 17 24 39;           
+
+  --border-color: 209 250 229;     */
+
+  /* softLavender */
+
+  /* --primary: 124 131 253;         
+  --primary-hover: 99 102 241;    
+
+  --bg-main: 247 245 255;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 31 41 55;
+
+  --border-color: 233 231 255;     */
+
+  /* softGray */
+
+  --primary: 79 124 255;          
+  --primary-hover: 59 102 224;    
+
+  --bg-main: 243 244 246;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 31 41 55;          
+
+  --border-color: 229 231 235;    
 
 }
 
 /* dark theme */
 [data-theme="dark"] {
 
-  --primary: 139 92 246;
+  /* default dark-slate(bluish) */
+  /* --primary: 139 92 246;
   --primary-hover: 124 58 237;
 
   --bg-main: 17 24 39;
@@ -23,7 +61,44 @@
 
   --text-main: 255 255 255;
 
-  --border-color: 55 65 81;
+  --border-color: 55 65 81; */
+
+  /* dark-purple */
+
+  /* --primary: 167 139 250;         
+  --primary-hover: 139 92 246;
+
+  --bg-main: 20 16 32;
+  --bg-card: 30 24 50;
+
+  --text-main: 237 233 254;
+
+  --border-color: 55 48 84; */
+
+  /* dark-graphite */
+
+  --primary: 99 102 241;          
+  --primary-hover: 79 70 229;
+
+  --bg-main: 24 24 27;            
+  --bg-card: 39 39 42;
+
+  --text-main: 244 244 245;
+
+  --border-color: 63 63 70;
+  
+  /* dark-teal */
+
+  /* --primary: 45 212 191;          
+  --primary-hover: 20 184 166;
+
+  --bg-main: 15 23 23;
+  --bg-card: 22 35 35;
+
+  --text-main: 229 231 235;
+
+  --border-color: 45 64 64; */
+
 
 }
 /* custom theme example */
@@ -39,4 +114,37 @@
   --text-secondary: #155e75;
 
   --border-color: #67e8f9;
+}
+
+
+/* ========================
+   CUSTOM UTILITIES
+======================== */
+
+.bg-bgMain {
+  background-color: rgb(var(--bg-main));
+}
+
+.bg-bgCard {
+  background-color: rgb(var(--bg-card));
+}
+
+.text-textMain {
+  color: rgb(var(--text-main));
+}
+
+.border-borderColor {
+  border-color: rgb(var(--border-color));
+}
+
+.bg-primary {
+  background-color: rgb(var(--primary));
+}
+
+.hover\:bg-primaryHover:hover {
+  background-color: rgb(var(--primary-hover));
+}
+
+.hover\:text-primary:hover {
+  color: rgb(var(--primary));
 }

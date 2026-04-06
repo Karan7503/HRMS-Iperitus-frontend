@@ -1,26 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Iperitus.png";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+
+import { Sun, Moon } from "lucide-react";
 
 function Navbar(){
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
+    const { theme, setTheme } = useContext(ThemeContext);
+
     const logoutUser = () => {
         localStorage.removeItem("token");
         navigate("/");
     };
 
-    const changeTheme = (theme) => {
+    // toggle only light ↔ dark
+    const toggleTheme = () => {
 
-        document.documentElement.setAttribute(
-            "data-theme",
-            theme
-        );
-
-        localStorage.setItem("theme", theme);
+        setTheme(theme === "dark" ? "light" : "dark");
 
     };
+
+    const isDark = theme === "dark";
+
 
     return(
 
@@ -29,17 +34,13 @@ function Navbar(){
         bg-bgCard
         border-b
         border-borderColor
-
         px-8
-        py-3
-
+        h-16
         flex
         items-center
         justify-between
-
         shadow-md
-        "
-        >
+        ">
 
             {/* LEFT - LOGO */}
             <div className="flex items-center gap-3">
@@ -47,16 +48,10 @@ function Navbar(){
                 <img 
                     src={logo} 
                     alt="Peritus Logo"
-                    className="h-10"
+                    className="h-20 w-auto object-contain"
                 />
 
-                <span
-                className="
-                text-textMain
-                font-semibold
-                text-lg
-                "
-                >
+                <span className="text-textMain font-semibold text-lg">
                     HRMS
                 </span>
 
@@ -71,82 +66,55 @@ function Navbar(){
                 flex
                 items-center
                 gap-8
-
                 text-textMain
                 font-medium
                 "
                 >
 
-                    <Link 
-                        to="/dashboard"
-                        className="
-                        hover:text-primary
-                        transition
-                        "
-                    >
+                    <Link to="/dashboard" className="hover:text-primary transition">
                         Dashboard
                     </Link>
 
-                    <Link 
-                        to="/employees"
-                        className="
-                        hover:text-primary
-                        transition
-                        "
-                    >
+                    <Link to="/employees" className="hover:text-primary transition">
                         Employees
                     </Link>
 
-                    <Link 
-                        to="/attendance"
-                        className="
-                        hover:text-primary
-                        transition
-                        "
-                    >
+                    <Link to="/attendance" className="hover:text-primary transition">
                         Attendance
                     </Link>
 
-                    <Link 
-                        to="/leave"
-                        className="
-                        hover:text-primary
-                        transition
-                        "
-                    >
+                    <Link to="/leave" className="hover:text-primary transition">
                         Leave
                     </Link>
 
 
-                    {/* THEME SWITCH */}
-                    <select
-                        onChange={(e) => changeTheme(e.target.value)}
+                    {/* THEME TOGGLE */}
+                    <button
+                        onClick={toggleTheme}
                         className="
-                        bg-bgMain
-                        text-textMain
+                        flex
+                        items-center
+                        justify-center
+                        w-9
+                        h-9
+                        rounded-full
 
+                        bg-bgMain
                         border
                         border-borderColor
 
-                        rounded
-                        px-2
-                        py-1
+                        transition
+                        hover:bg-primary/10
                         "
+                        title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
                     >
 
-                        <option value="light">
-                            Light
-                        </option>
+                        {isDark
+                            ? <Sun className="w-4 h-4 text-yellow-500" />
+                            : <Moon className="w-4 h-4 text-gray-600" />
+                        }
 
-                        <option value="dark">
-                            Dark
-                        </option>
-
-                        <option value="green">
-                            Green
-                        </option>
-
-                    </select>
+                    </button>
 
 
                     {/* LOGOUT BUTTON */}
@@ -155,14 +123,10 @@ function Navbar(){
                         className="
                         bg-primary
                         hover:bg-primaryHover
-
                         text-white
-
                         px-3
                         py-1
-
                         rounded
-
                         transition
                         "
                     >

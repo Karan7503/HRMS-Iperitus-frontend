@@ -36,6 +36,7 @@ function Login() {
 
       <div className="
         bg-bgCard
+        
         text-textMain
         p-8
         rounded-2xl
