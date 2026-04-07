@@ -38,9 +38,9 @@ function Dashboard(){
 
     return(
 
-        <div className="p-6">
+        <div className="p-6 bg-bgMain min-h-full">
 
-            <h1 className="text-2xl font-bold mb-6">
+            <h1 className="text-2xl font-semibold text-textMain mb-6">
                 HRMS Dashboard
             </h1>
 
@@ -49,36 +49,42 @@ function Dashboard(){
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <div className="bg-white shadow-md rounded-xl p-5 border">
-                    <h3 className="text-gray-500">
+                <div className="bg-bgCard shadow-md rounded-xl p-5 border border-borderColor">
+
+                    <h3 className="text-textMain/70 text-sm">
                         Total Employees
                     </h3>
 
-                    <p className="text-3xl font-bold">
+                    <p className="text-3xl font-semibold text-textMain">
                         {employees.length}
                     </p>
+
                 </div>
 
 
-                <div className="bg-white shadow-md rounded-xl p-5 border">
-                    <h3 className="text-gray-500">
+                <div className="bg-bgCard shadow-md rounded-xl p-5 border border-borderColor">
+
+                    <h3 className="text-textMain/70 text-sm">
                         Attendance Records
                     </h3>
 
-                    <p className="text-3xl font-bold">
+                    <p className="text-3xl font-semibold text-textMain">
                         {attendance.length}
                     </p>
+
                 </div>
 
 
-                <div className="bg-white shadow-md rounded-xl p-5 border">
-                    <h3 className="text-gray-500">
+                <div className="bg-bgCard shadow-md rounded-xl p-5 border border-borderColor">
+
+                    <h3 className="text-textMain/70 text-sm">
                         Leave Requests
                     </h3>
 
-                    <p className="text-3xl font-bold">
+                    <p className="text-3xl font-semibold text-textMain">
                         {leaves.length}
                     </p>
+
                 </div>
 
             </div>
@@ -89,7 +95,7 @@ function Dashboard(){
 
             <div className="mt-10">
 
-                <h2 className="text-xl font-semibold mb-4">
+                <h2 className="text-xl font-semibold text-textMain mb-4">
                     Quick Actions
                 </h2>
 
@@ -98,7 +104,16 @@ function Dashboard(){
 
                     <Link
                         to="/employees"
-                        className="bg-indigo-600 text-white p-5 rounded-xl shadow hover:bg-indigo-700 transition"
+                        className="
+                        bg-primary
+                        text-white
+                        p-5
+                        rounded-xl
+                        shadow-sm
+                        hover:bg-primaryHover
+                        transition
+                        text-center
+                        "
                     >
                         Manage Employees
                     </Link>
@@ -106,7 +121,16 @@ function Dashboard(){
 
                     <Link
                         to="/attendance"
-                        className="bg-green-600 text-white p-5 rounded-xl shadow hover:bg-green-700 transition"
+                        className="
+                        bg-primary
+                        text-white
+                        p-5
+                        rounded-xl
+                        shadow-sm
+                        hover:bg-primaryHover
+                        transition
+                        text-center
+                        "
                     >
                         View Attendance
                     </Link>
@@ -114,7 +138,16 @@ function Dashboard(){
 
                     <Link
                         to="/leave"
-                        className="bg-purple-600 text-white p-5 rounded-xl shadow hover:bg-purple-700 transition"
+                        className="
+                        bg-primary
+                        text-white
+                        p-5
+                        rounded-xl
+                        shadow-sm
+                        hover:bg-primaryHover
+                        transition
+                        text-center
+                        "
                     >
                         Manage Leave
                     </Link>
@@ -132,9 +165,9 @@ function Dashboard(){
 
                 {/* RECENT EMPLOYEES */}
 
-                <div className="bg-white p-5 rounded-xl shadow border">
+                <div className="bg-bgCard p-5 rounded-xl shadow-md border border-borderColor">
 
-                    <h3 className="font-semibold mb-3">
+                    <h3 className="font-semibold text-textMain mb-3">
                         Employees
                     </h3>
 
@@ -142,7 +175,10 @@ function Dashboard(){
 
                         employees.slice(0,5).map((emp,index)=>(
 
-                            <div key={index} className="border-b py-1">
+                            <div
+                                key={index}
+                                className="border-b border-borderColor py-2 text-textMain"
+                            >
 
                                 {emp.name} | {emp.department}
 
@@ -158,9 +194,9 @@ function Dashboard(){
 
                 {/* RECENT LEAVES */}
 
-                <div className="bg-white p-5 rounded-xl shadow border">
+                <div className="bg-bgCard p-5 rounded-xl shadow-md border border-borderColor">
 
-                    <h3 className="font-semibold mb-3">
+                    <h3 className="font-semibold text-textMain mb-3">
                         Leave Requests
                     </h3>
 
@@ -168,7 +204,10 @@ function Dashboard(){
 
                         leaves.slice(0,5).map((l,index)=>(
 
-                            <div key={index} className="border-b py-1">
+                            <div
+                                key={index}
+                                className="border-b border-borderColor py-2 text-textMain"
+                            >
 
                                 {l.leave_type} | {l.status}
 

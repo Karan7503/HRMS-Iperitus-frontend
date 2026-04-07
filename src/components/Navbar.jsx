@@ -1,30 +1,74 @@
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/Iperitus.png";
-import { useContext } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import logo from "../assets/IPeritusLogo.png";
+import { useContext, useState, useRef, useEffect } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Monitor, Check, Droplets, Leaf, Flower, Palette, Flame  } from "lucide-react";
 
 function Navbar(){
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
+	const location = useLocation();
+
+	//location/url check
+	const isLoginPage = location.pathname === "/"; 
+	const isDashboard = location.pathname === "/dashboard"; 
+	const isEmployee = location.pathname === "/employees"; 
+	const isAttendance = location.pathname === "/attendance"; 
+	const isLeave = location.pathname === "/leave"; 
+
 
     const { theme, setTheme } = useContext(ThemeContext);
+
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const logoutUser = () => {
         localStorage.removeItem("token");
         navigate("/");
     };
 
-    // toggle only light ↔ dark
-    const toggleTheme = () => {
+    const changeTheme = (selectedTheme) => {
 
-        setTheme(theme === "dark" ? "light" : "dark");
+        if(selectedTheme === "system"){
 
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            setTheme(prefersDark ? "dark" : "light");
+
+            localStorage.setItem("theme", "system");
+
+        }
+        else{
+
+            setTheme(selectedTheme);
+
+            localStorage.setItem("theme", selectedTheme);
+
+        }
+
+        setOpen(false);
     };
 
-    const isDark = theme === "dark";
+    // close dropdown when clicking outside
+    useEffect(()=>{
+
+        const handleClickOutside = (event) => {
+
+            if(!dropdownRef.current?.contains(event.target)){
+
+                setOpen(false);
+
+            }
+
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    },[]);
 
 
     return(
@@ -34,7 +78,7 @@ function Navbar(){
         bg-bgCard
         border-b
         border-borderColor
-        px-8
+		pl-4
         h-16
         flex
         items-center
@@ -48,18 +92,18 @@ function Navbar(){
                 <img 
                     src={logo} 
                     alt="Peritus Logo"
-                    className="h-20 w-auto object-contain"
+                    className="h-7 w-auto object-contain "
                 />
 
-                <span className="text-textMain font-semibold text-lg">
-                    HRMS
+                <span className="text-textMain font-light text-xl tracking-wide -ml-6">
+                    {/* HRMS */}
                 </span>
 
             </div>
 
 
             {/* RIGHT - NAV LINKS */}
-            {token && (
+            {!isLoginPage && token && (
 
                 <div
                 className="
@@ -70,51 +114,270 @@ function Navbar(){
                 font-medium
                 "
                 >
+					{!isDashboard && (
+						<Link to="/dashboard" className="hover:text-primary transition font-normal">
+							Dashboard
+						</Link>
+					)}
 
-                    <Link to="/dashboard" className="hover:text-primary transition">
-                        Dashboard
-                    </Link>
+					{!isEmployee && (
 
-                    <Link to="/employees" className="hover:text-primary transition">
-                        Employees
-                    </Link>
+						<Link to="/employees" className="hover:text-primary transition font-normal">
+							Employees
+						</Link>
+					)}
 
-                    <Link to="/attendance" className="hover:text-primary transition">
-                        Attendance
-                    </Link>
+					{!isAttendance && (
+						<Link to="/attendance" className="hover:text-primary transition font-normal">
+							Attendance
+						</Link>
+					)}
 
-                    <Link to="/leave" className="hover:text-primary transition">
-                        Leave
-                    </Link>
+					{!isLeave && (
+						<Link to="/leave" className="hover:text-primary transition font-normal">
+							Leave
+						</Link>
+					)}
 
 
-                    {/* THEME TOGGLE */}
-                    <button
-                        onClick={toggleTheme}
-                        className="
-                        flex
-                        items-center
-                        justify-center
-                        w-9
-                        h-9
-                        rounded-full
+                    {/* GOOGLE STYLE THEME DROPDOWN */}
+                    <div className="relative" ref={dropdownRef}>
 
-                        bg-bgMain
-                        border
-                        border-borderColor
+                        <button
+                            onClick={() => setOpen(!open)}
+                            className="
+                            flex
+                            items-center
+                            justify-center
+                            w-9
+                            h-9
+                            rounded-full
+							bg-primarySoft
+                            bg-bgMain
+                            border
+                            border-borderColor
+							cursor-pointer
+							hover:bg-primarySoft
+                            transition
+							
+                            "
+                        >
 
-                        transition
-                        hover:bg-primary/10
-                        "
-                        title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                    >
+                            {/* {theme === "dark"
+                                ? <Sun className="w-4 h-4 text-yellow-400" />
+                                : <Moon className="w-4 h-4 text-gray-600" />
+                            } */}
 
-                        {isDark
-                            ? <Sun className="w-4 h-4 text-yellow-500" />
-                            : <Moon className="w-4 h-4 text-gray-600" />
-                        }
+							{theme === "dark" && (<Moon  stroke="white" className="w-4 h-4 text-gray-600" />)}
+							{theme === "light" && (<Sun  className="w-4 h-4 text-gray-600" />)}
+							{theme === "softBlue" && (<Droplets className="w-4 h-4 text-gray-600" />)}
+							{theme === "mintGreen" && (<Leaf className="w-4 h-4 text-gray-600" />)}
+							{theme === "softLavender" && (<Flower className="w-4 h-4 text-gray-600" />)}
+							{theme === "Flame" && (<Flame className="w-4 h-4 text-gray-600" />)}
+							
 
-                    </button>
+                        </button>
+
+						{open && (
+
+						<div
+							className="
+							absolute
+							right-0
+							mt-3
+
+							w-72
+							p-4
+							grid
+							grid-cols-3
+							gap-4
+
+							bg-bgCard
+							border
+							border-borderColor
+
+							rounded-3xl
+							shadow-xl
+							z-50
+							"
+						>
+
+							{/* LIGHT */}
+							<button
+							onClick={() => changeTheme("light")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+							w-20 h-20 rounded-2xl
+							transition
+							hover:bg-primary/10 hover:scale-105
+
+							${theme === "light" ? "bg-primary/10" : ""}
+							`}
+							>
+
+								{/* className="text-yellow-500" */}
+							<Sun
+								size={22}
+								stroke="orange"   // outline
+  								fill="yellow" 
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Light
+							</span>
+
+							</button>
+
+
+							{/* DARK */}
+							<button
+							onClick={() => changeTheme("dark")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+							w-20 h-20 rounded-2xl
+							transition
+							hover:bg-primary/10 hover:scale-105
+
+							${theme === "dark" ? "bg-primary/10" : ""}
+							`}
+							>
+
+								{/* className="text-gray-800 dark:text-gray-200 fill-dark-500" */}
+							<Moon
+								size={22}
+								stroke="white"   
+  								fill="black" 
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Dark
+							</span>
+
+							</button>
+
+
+							{/* SOFT BLUE */}
+							<button
+							onClick={() => changeTheme("softBlue")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+							w-20 h-20 rounded-2xl
+							transition
+							hover:bg-primary/10 hover:scale-105
+
+							${theme === "softBlue" ? "bg-primary/10" : ""}
+							`}
+							>
+
+							<Droplets
+								size={22}
+								stroke="white"
+
+								className="text-blue-500 fill-blue-500"
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Blue
+							</span>
+
+							</button>
+
+
+							{/* MINT */}
+							<button
+							onClick={() => changeTheme("mintGreen")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+
+							w-20 h-20
+							rounded-2xl
+
+							transition
+
+							hover:bg-primary/10
+							hover:scale-105
+
+							${theme === "mintGreen"
+								? "bg-primary/10"
+								: ""
+							}
+							`}
+							>
+
+							<Leaf
+								size={22}
+								stroke="white"
+
+								className="
+								text-emerald-500
+								fill-emerald-500
+								"
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Mint
+							</span>
+
+							</button>
+
+
+							{/* LAVENDER */}
+							<button
+							onClick={() => changeTheme("softLavender")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+							w-20 h-20 rounded-2xl
+							transition
+							hover:bg-primary/10 hover:scale-105
+
+							${theme === "softLavender" ? "bg-primary/10" : ""}
+							`}
+							>
+
+							<Flower
+								size={22}
+								stroke="white"
+								className="text-violet-500 fill-violet-500"
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Lavn
+							</span>
+
+							</button>
+
+
+							{/* ORANGE */}
+							<button
+							onClick={() => changeTheme("Flame")}
+							className={`
+							flex flex-col items-center justify-center gap-1
+							w-20 h-20 rounded-2xl
+							transition
+							hover:bg-primary/10 hover:scale-105
+
+							${theme === "Flame" ? "bg-primary/10" : ""}
+							`}
+							>
+
+							<Flame
+								size={22}
+								
+								className="text-orange-500 fill-orange-500"
+							/>
+
+							<span className="text-xs font-normal text-textMain">
+								Flame
+							</span>
+
+							</button>
+
+						</div>
+
+						)}
+                        
+
+                    </div>
 
 
                     {/* LOGOUT BUTTON */}
@@ -124,10 +387,13 @@ function Navbar(){
                         bg-primary
                         hover:bg-primaryHover
                         text-white
+						mr-3
                         px-3
                         py-1
                         rounded
                         transition
+						cursor-pointer
+						
                         "
                     >
                         Logout

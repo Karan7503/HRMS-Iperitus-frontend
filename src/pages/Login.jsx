@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-import logo from "../assets/Iperitus.png";
+// import logo from "../assets/Iperitus.png";
+import logo from "../assets/IPeritusLogo.png";
+
 
 function Login() {
 
@@ -25,12 +27,17 @@ function Login() {
     }
   };
 
+  // min-h-screen
+  // flex items-center justify-center
 
   return (
 
     <div className="
-      min-h-screen
-      flex items-center justify-center
+      flex
+      items-center
+      justify-center
+
+      min-h-[calc(100vh-4rem-3rem)]
       bg-bgMain
     ">
 
@@ -50,8 +57,9 @@ function Login() {
         <img
           src={logo}
           alt="Peritus Logo"
-          className="h-40 mx-auto "
-        />
+          className="h-10 mx-auto mb-12 mt-4" 
+          />
+          {/* className="h-14 mx-auto mb-10 mt-4" */}
 
 
         {/* <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -104,7 +112,9 @@ function Login() {
               text-white
               font-semibold
               bg-black
-              transition"
+              transition
+              cursor-pointer
+              "
           >
             Login
           </button>
