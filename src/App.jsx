@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
 
 import Login from './pages/Login';
+import Register from "./pages/Register";
 import Dashboard from './pages/Dashboard';
 import Employees from './pages/Employees';
 import Attendance from './pages/Attendance';
@@ -31,6 +32,8 @@ function App() {
 
           <Routes>
 
+            <Route path="/register" element={<Register />} />
+            
             <Route path='/' element={<Login/>}/>
 
             <Route path='/dashboard' element={<Dashboard/>}/>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-// import logo from "../assets/Iperitus.png";
 import logo from "../assets/IPeritusLogo.png";
+import { Link } from "react-router-dom";
+
+
 
 
 function Login() {
@@ -17,8 +19,9 @@ function Login() {
         email,
         password
       });
-
+    
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.user.role);
 
       window.location.href = "/dashboard";
 
@@ -118,6 +121,21 @@ function Login() {
           >
             Login
           </button>
+
+          <p className="text-sm text-center mt-4 text-textMain/70">
+
+            Don't have account?
+
+            <Link
+              to="/register"
+              className="text-primary ml-1"
+            >
+
+              Register
+
+            </Link>
+
+          </p>
 
         </div>
 

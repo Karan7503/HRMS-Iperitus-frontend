@@ -15,7 +15,8 @@
 }
 
 [data-theme="softBlue"] {
-     --primary: 79 124 255;          
+
+  --primary: 79 124 255;          
   --primary-hover: 59 102 224;    
   --bg-main: 245 247 251;        
   --bg-card: 255 255 255;         
@@ -67,29 +68,6 @@
 /* dark theme */
 [data-theme="dark"] {
 
-  /* default dark-slate(bluish) */
-  /* --primary: 139 92 246;
-  --primary-hover: 124 58 237;
-
-  --bg-main: 17 24 39;
-  --bg-card: 31 41 55;
-
-  --text-main: 255 255 255;
-
-  --border-color: 55 65 81; */
-
-  /* dark-purple */
-
-  /* --primary: 167 139 250;         
-  --primary-hover: 139 92 246;
-
-  --bg-main: 20 16 32;
-  --bg-card: 30 24 50;
-
-  --text-main: 237 233 254;
-
-  --border-color: 55 48 84; */
-
   /* dark-graphite */
 
   --primary: 99 102 241;          
@@ -101,19 +79,6 @@
   --text-main: 244 244 245;
 
   --border-color: 63 63 70;
-  
-  /* dark-teal */
-
-  /* --primary: 45 212 191;          
-  --primary-hover: 20 184 166;
-
-  --bg-main: 15 23 23;
-  --bg-card: 22 35 35;
-
-  --text-main: 229 231 235;
-
-  --border-color: 45 64 64; */
-
 
 }
 
@@ -155,4 +120,14 @@
 
 .bg-primarySoft {
   background-color: rgb(var(--primary) / 0.12);
+}
+
+.bg-primaryGradient {
+
+  background: linear-gradient(
+    135deg,
+    rgb(var(--primary)),
+    rgb(var(--primary-hover))
+  );
+
 }
