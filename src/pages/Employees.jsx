@@ -24,7 +24,7 @@ function Employees() {
 
     const addEmployee = async () => {
 
-        await API.post("/employees/add", form);
+        await API.post("/employees", form);
 
         setForm({
             name: "",

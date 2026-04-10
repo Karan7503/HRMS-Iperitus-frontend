@@ -22,6 +22,7 @@ function Login() {
     
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.user.role);
+      localStorage.setItem("name", res.data.user.name);
 
       window.location.href = "/dashboard";
 
@@ -30,8 +31,7 @@ function Login() {
     }
   };
 
-  // min-h-screen
-  // flex items-center justify-center
+
 
   return (
 
@@ -122,20 +122,7 @@ function Login() {
             Login
           </button>
 
-          <p className="text-sm text-center mt-4 text-textMain/70">
-
-            Don't have account?
-
-            <Link
-              to="/register"
-              className="text-primary ml-1"
-            >
-
-              Register
-
-            </Link>
-
-          </p>
+          
 
         </div>
 

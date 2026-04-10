@@ -80,28 +80,7 @@ function ThemeDropdown(){
 
             {open && (
 
-                // <div className="
-                //     absolute
-                //     right-0
-                //     mt-3
                 
-                //     w-72
-                //     p-4
-
-                //     grid
-                //     grid-cols-3
-                //     gap-4
-
-                //     bg-bgCard
-
-                //     border
-                //     border-borderColor
-
-                //     rounded-3xl
-
-                //     shadow-xl
-                //     z-50
-                // ">
 
                <div className="
                     absolute

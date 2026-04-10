@@ -26,7 +26,7 @@ function NavLinks(){
             )}
 
             {location.pathname !== "/attendance" && (
-                <Link to="/attendance" className={linkStyle}>
+                <Link to="/all-attendance" className={linkStyle}>
                     Attendance
                 </Link>
             )}

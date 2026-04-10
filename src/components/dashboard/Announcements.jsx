@@ -1,51 +1,88 @@
+import { useEffect, useState } from "react";
+import API from "../../services/api";
+
 function Announcements(){
 
-    const announcements = [
-        "New HR policy updated",
-        "Office closed on Friday",
-        "Team meeting at 3PM"
-    ];
+  const [announcements,setAnnouncements] = useState([]);
 
-    return(
 
-        <div className="
-        bg-bgCard
-        p-5
-        rounded-xl
-        border
-        border-borderColor
-        shadow-md
-        ">
+  const loadAnnouncements = async()=>{
 
-            <h3 className="font-semibold text-textMain mb-3">
-                Announcements
-            </h3>
+    const res = await API.get("/announcements");
 
-            <div className="space-y-2">
+    setAnnouncements(res.data);
 
-                {announcements.map((item,index)=>(
-                    
-                    <div
-                        key={index}
-                        className="
-                        bg-bgMain
-                        text-textMain
-                        border
-                        border-borderColor
-                        rounded-lg
-                        p-2
-                        "
-                    >
-                        {item}
-                    </div>
+  };
 
-                ))}
+
+  useEffect(()=>{
+
+    loadAnnouncements();
+
+  },[]);
+
+
+
+  return(
+
+    <div className="
+    bg-bgCard
+    p-5
+    rounded-xl
+    border
+    border-borderColor
+    shadow-md
+    ">
+
+      <h3 className="font-semibold text-textMain mb-3">
+
+        Announcements
+
+      </h3>
+
+
+      <div className="space-y-2">
+
+        {
+
+          announcements.map((item,index)=>(
+
+            <div
+              key={index}
+              className="
+              bg-bgMain
+              text-textMain
+              border
+              border-borderColor
+              rounded-lg
+              p-2
+              "
+            >
+
+              <p className="font-medium">
+
+                {item.title}
+
+              </p>
+
+
+              <p className="text-sm opacity-70">
+
+                {item.message}
+
+              </p>
 
             </div>
 
-        </div>
+          ))
 
-    );
+        }
+
+      </div>
+
+    </div>
+
+  );
 
 }
 

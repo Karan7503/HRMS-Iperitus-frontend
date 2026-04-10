@@ -1,4 +1,4 @@
-function SummaryCards({ employees, attendance, leaves }){
+function SummaryCards({ employees = [], attendance = [], leaves = []}){
 
     return(
 

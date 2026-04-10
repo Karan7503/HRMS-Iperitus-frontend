@@ -9,14 +9,21 @@ import Attendance from './pages/Attendance';
 import Leave from './pages/Leave';
 
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Footer from './components/Footer/Footer';
+
+import ManageLeave from "./pages/admin/ManageLeave";
+import ManageEmployees from './pages/admin/ManageEmployees';
+import ManageAttendance from './pages/admin/ManageAttendance';
+import WelcomeCard from './components/dashboard/WelcomeCard';
+import AllAttendance from './pages/admin/AllAtendance';
 
 function App() {
 
   const token = localStorage.getItem("token");
-  // const location = useLocation();
+  const role = localStorage.getItem("role");
 
-  // const hideNavbar = location.pathname === "/";
+  const isLoginPage = location.pathname === "/";
+ 
 
   return (
 
@@ -26,9 +33,12 @@ function App() {
 
         {/* {!hideNavbar && <Navbar />} */}
         <Navbar/>
+        
 
         {/* Page content */}
         <main className="flex-1">
+          {/* {!isLoginPage && <WelcomeCard role={role}/>} */}
+          
 
           <Routes>
 
@@ -41,8 +51,16 @@ function App() {
             <Route path='/employees' element={<Employees/>}/>
             
             <Route path='/attendance' element={<Attendance/>}/>
+            {/* <Route path="/mark-attendance" element={<Attendance />} /> */}
+            <Route path="/all-attendance" element={<AllAttendance />} />
 
             <Route path='/leave' element={<Leave/>}/>
+
+            <Route path="/admin/employees" element={<ManageEmployees/>} />
+
+            <Route path="/admin/attendance" element={<ManageAttendance/>} />
+
+            <Route path="/admin/leave" element={<ManageLeave/>} />
 
           </Routes>
 
